@@ -1,0 +1,19 @@
+@startuml component
+
+title Компонентная диаграмма: Умная лента новостей
+
+skinparam componentStyle rectangle
+skinparam linetype ortho
+
+component "Клиент" as Client
+component "Сервер" as Server
+component "GPT-Модель" as GPT
+database "PostgreSQL" as DB
+
+Client --> Server : HTTP API (POST /create_post)
+Server --> GPT : Запрос на генерацию Markdown
+GPT --> Server : Ответ с Markdown
+Server --> DB : Сохранение поста
+Server --> Client : Ответ с данными поста
+
+@enduml

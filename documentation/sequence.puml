@@ -1,0 +1,15 @@
+@startuml sequence
+title Последовательность создания поста
+
+participant "Android Клиент" as Client
+participant "Django Сервер" as Server
+participant "GPT-Модель" as GPT
+database "PostgreSQL" as DB
+
+Client -> Server : POST /create_post (тема или несколько тем)
+Server -> GPT : Запрос на генерацию Markdown (темы)
+GPT -> Server : Возвращает Markdown
+Server -> DB : Сохраняет пост (Markdown + метаданные)
+Server -> Client : Возвращает ответ (Markdown)
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml c4_class
+title Диаграмма классов
+skinparam linetype polyline
+top to bottom direction
+
+package "Domain" {
+  class Post {
+    - id: UUID
+    - title: str
+    - content: str
+    - created_at: datetime
+    + validate(): bool
+  }
+
+  interface PostRepository {
+    + save(post: Post): None
+    + get_by_id(id: UUID): Post
+  }
+}
+
+package "Application" {
+  class CreatePostUseCase {
+    + execute(title: str, topics: list[str]) : Post
+  }
+}
+
+package "Infrastructure" {
+  class DjangoPostRepository {
+    + save(post: Post): None
+    + get_by_id(id: UUID): Post
+  }
+
+  class GPTService {
+    + generate_markdown(topics: list[str]): str
+  }
+
+  class DjangoPostAPI {
+    + create_post(request: Request): Response
+  }
+}
+
+Domain ..> Application
+Application ..> Infrastructure
+
+PostRepository <|.. DjangoPostRepository
+CreatePostUseCase --> PostRepository
+CreatePostUseCase --> GPTService
+DjangoPostAPI --> CreatePostUseCase
+
+@enduml
