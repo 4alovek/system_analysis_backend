@@ -1,0 +1,29 @@
+@startuml DB_schema
+title Базовая диаграмма БД
+
+class User {
+    id: bigint <<generated>>
+    --
+    username: string
+    email: string
+    created_at: timestamp
+}
+
+class Post {
+    id: bigint <<generated>>
+    --
+    title: string
+    content: text
+    created_at: timestamp
+    user_id: bigint
+}
+
+class UserInterests {
+    id: bigint <<generated>>
+    --
+    user_id: bigint
+    interests: jsonb
+}
+UserInterests ||..o User
+
+@enduml
