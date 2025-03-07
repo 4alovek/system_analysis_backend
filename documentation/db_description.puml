@@ -1,29 +1,66 @@
 @startuml DB_schema
-title Базовая диаграмма БД
+title Диаграмма БД
 
-class User {
-    id: bigint <<generated>>
-    --
-    username: string
-    email: string
-    created_at: timestamp
+skinparam linetype ortho
+skinparam roundcorner 15
+skinparam shadowing false
+
+' Таблицы
+entity "User" as User {
+  * user_id : SERIAL
+  * email : VARCHAR(255) <<UNIQUE>>
+  * password_hash : VARCHAR(255)
+  * full_name : VARCHAR(100)
+  * created_at : TIMESTAMP
 }
 
-class Post {
-    id: bigint <<generated>>
-    --
-    title: string
-    content: text
-    created_at: timestamp
-    user_id: bigint
+entity "Interest" as Interest {
+  * interest_id : SERIAL
+  * name : VARCHAR(50) <<UNIQUE>>
+  * category : VARCHAR(50)
 }
 
-class UserInterests {
-    id: bigint <<generated>>
-    --
-    user_id: bigint
-    interests: jsonb
+entity "UserInterest" as UserInterest {
+  * user_id : INT
+  * interest_id : INT
+  * preference_weight : FLOAT <<default:1.0>>
 }
-UserInterests ||..o User
+
+entity "Post" as Post {
+  * post_id : SERIAL
+  * user_id : INT <<nullable>>  # Для постов, созданных автоматически
+  * title : VARCHAR(200)
+  * content : TEXT
+  * generated_by_gpt : BOOLEAN
+  * created_at : TIMESTAMP
+  * status : VARCHAR(20) <<enum: draft,published,archived>>
+}
+
+entity "GPTRequest" as GPTRequest {
+  * request_id : SERIAL
+  * user_id : INT
+  * prompt : TEXT
+  * gpt_response : TEXT
+  * created_at : TIMESTAMP
+  * *post_id : INT <<nullable>>  # Связь с сгенерированным постом
+}
+
+entity "PostReaction" as PostReaction {
+  * reaction_id : SERIAL
+  * user_id : INT
+  * post_id : INT
+  * reaction_type : VARCHAR(10) <<enum: like,dislike>>
+  * created_at : TIMESTAMP
+}
+
+' Связи
+User ||--o{ UserInterest : "has interests"
+Interest ||--o{ UserInterest : "belongs to"
+
+User ||..o{ Post : "creates (optional)"
+Post ||--o{ GPTRequest : "generated from"
+
+Post ||--o{ PostReaction : "receives"
+User ||--o{ PostReaction : "makes"
 
 @enduml
