@@ -2,7 +2,7 @@
 name = "system-analysis-backend"
 version = "0.1.0"
 description = "A mobile app for personalized news feed generation using GPT integration."
-authors = [""]
+authors = ["Ryan Gosling"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
