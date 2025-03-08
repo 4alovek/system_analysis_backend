@@ -19,6 +19,7 @@ requests = "^2.32"
 # Дополнительные зависимости
 django-filter = "^25.1"
 drf-spectacular = "^0.28"
+openai = "^1.65.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^8.3"
