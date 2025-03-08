@@ -90,6 +90,7 @@ python manage.py migrate
 
 ### 5. Запуск сервера разработки
 ```bash
+ollama run llama3.1 # Для запуска локальной модели (При наличии)
 python frameworks_and_drivers/django/manage.py runserver
 ```
 
