@@ -1,17 +1,16 @@
-import requests
-from django.conf import settings
+from openai import OpenAI
 
-def generate_post_content(prompt):
-    api_key = settings.GPT_API_KEY
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    data = {
-        "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 500
-    }
-    response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
-    response.raise_for_status()
-    return response.json()["choices"][0]["message"]["content"]
+client = OpenAI(
+    base_url = 'http://localhost:11434/v1',
+    api_key='ollama3.1', # required, but unused
+)
+
+response = client.chat.completions.create(
+  model="llama3.1",
+  messages=[
+    {"role": "user", "content": "Создай креативный пост по темам в формате Markdown, темы сейчас пришлю"},
+    {"role": "user", "content": "Музыка, Инвестиции, Covid-19"}
+  ]
+)
+print(response.choices[0].message.content)
+# ollama run llama3.1
