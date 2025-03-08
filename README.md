@@ -76,9 +76,9 @@ cd system_analysis_backend
 poetry install
 ```
 
-### 3. Настройка подключение к GPT-модели находится в файле
+### 3. Настройка подключения к GPT-модели находится в файле
 ```bash
--  `src/frameworks_and_drivers/django/gpt_integration/gpt_service.py`
+src/frameworks_and_drivers/django/gpt_integration/gpt_service.py
 ```
 
 ### 4. Запуск сервера разработки
