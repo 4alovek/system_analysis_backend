@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "system-analysis-backend"
+version = "0.1.0"
+description = "A mobile app for personalized news feed generation using GPT integration."
+authors = ["Ryan Gosling"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1"
+djangorestframework = "^3.15"
+psycopg-binary = "^3.2"
+django-cors-headers = "^4.7"
+gunicorn = "^23.0"
+whitenoise = "^6.9"
+django-environ = "^0.12"
+requests = "^2.32"
+
+# Дополнительные зависимости
+django-filter = "^25.1"
+drf-spectacular = "^0.28"
+openai = "^1.65.4"
+psycopg = "^3.2.5"
+psycopg2-binary = "^2.9.10"
+
+[poetry.group.dev.dependencies]
+pytest = "^8.3"
+pytest-django = "^4.10"
+black = "^23.3"  # Форматирование кода
+flake8 = "^6.1"  # Проверка качества кода
+isort = "^5.12"  # Сортировка импортов
+factory-boy = "^3.2"  # Для создания фикстур в тестах
+coverage = "^7.2"  # Для измерения покрытия тестами
+
+[tool.poetry.scripts]
+start = "manage.py:main"  # Если вы хотите использовать poetry run start
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
