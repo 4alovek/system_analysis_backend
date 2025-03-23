@@ -1,51 +1,23 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 
 
-class User(AbstractUser):
-    full_name = models.CharField(_("Full name"), max_length=100)
-    email = models.EmailField(_("Email address"), unique=True)
+class User(models.Model):
+    user_id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'full_name']
-
-    class Meta:
-        verbose_name = _("User")
-        verbose_name_plural = _("Users")
-
-
-class Interest(models.Model):
-    name = models.CharField(_("Interest name"), max_length=50, unique=True)
-    category = models.CharField(_("Category"), max_length=50)
-
-    def __str__(self):
-        return self.name
+    email = models.EmailField(unique=True)
+    password_hash = models.CharField(max_length=128)  # Совместимо с Django-авторизацией
+    full_name = models.CharField(max_length=255)
 
     class Meta:
-        verbose_name = _("Interest")
-        verbose_name_plural = _("Interests")
-        unique_together = ['name', 'category']
+        app_label = "frameworks_and_drivers.django.users"
 
 
 class UserInterest(models.Model):
-    user = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE,
-        related_name='interests'
-    )
-    interest = models.ForeignKey(
-        Interest, 
-        on_delete=models.CASCADE,
-        related_name='users'
-    )
-    preference_weight = models.FloatField(
-        _("Preference weight"), 
-        default=1.0
-    )
-
+    interest_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='interests')
+    interest_name = models.CharField(max_length=100)
+    preference_weight = models.FloatField(default=1.0)
+    preference_difficulty = models.IntegerField(default=1)
+    
     class Meta:
-        verbose_name = _("User Interest")
-        verbose_name_plural = _("User Interests")
-        unique_together = ['user', 'interest']
+        app_label = "frameworks_and_drivers.django.users"

@@ -22,6 +22,7 @@ python -m pip list
 
 # Запускаем миграции
 echo "Running migrations..."
+python src/frameworks_and_drivers/django/manage.py makemigrations
 python src/frameworks_and_drivers/django/manage.py migrate
 
 # Запускаем сервер

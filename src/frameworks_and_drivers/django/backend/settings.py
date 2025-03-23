@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'frameworks_and_drivers.django.gpt_integration',
+    'frameworks_and_drivers.django.posts.apps.PostsConfig',
+    'frameworks_and_drivers.django.users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -86,6 +89,11 @@ DATABASES = {
         'PASSWORD': env('DB_PASSWORD'),
         'HOST': env('DB_HOST'),
         'PORT': 5432,
+        # 'NAME': "backend",
+        # 'USER': "user",
+        # 'PASSWORD': "pass",
+        # 'HOST': "localhost",
+        # 'PORT': 5432,
     }
 }
 
