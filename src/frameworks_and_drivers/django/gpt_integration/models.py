@@ -1,11 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from frameworks_and_drivers.django.posts.models import Post
-from frameworks_and_drivers.django.users.models import User
+from posts.models import Post
+from users.models import AppUser
 
 class GPTRequest(models.Model):
     user = models.ForeignKey(
-        User, 
+        AppUser, 
         on_delete=models.CASCADE,
         related_name='gpt_requests'
     )

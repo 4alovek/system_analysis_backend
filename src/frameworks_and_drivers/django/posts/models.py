@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from frameworks_and_drivers.django.users.models import User
+from users.models import AppUser
 
 
 class Post(models.Model):
@@ -12,7 +12,7 @@ class Post(models.Model):
     ]
 
     user = models.ForeignKey(
-        User, 
+        AppUser, 
         on_delete=models.SET_NULL,
         null=True, 
         blank=True,
@@ -44,7 +44,7 @@ class PostReaction(models.Model):
     ]
 
     user = models.ForeignKey(
-        User, 
+        AppUser, 
         on_delete=models.CASCADE,
         related_name='reactions'
     )

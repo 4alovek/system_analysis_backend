@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import User
+from .models import AppUser
 
-@admin.register(User)
+@admin.register(AppUser)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'full_name', 'is_active', 'created_at')
+    list_display = ('email', 'full_name')
     search_fields = ('email', 'full_name')

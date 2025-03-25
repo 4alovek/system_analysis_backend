@@ -1,9 +1,8 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class User(AbstractUser):
+class AppUser(models.Model):
     full_name = models.CharField(_("Full name"), max_length=100)
     email = models.EmailField(_("Email address"), unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -12,6 +11,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['username', 'full_name']
 
     class Meta:
+        app_label = "users"
         verbose_name = _("User")
         verbose_name_plural = _("Users")
 
@@ -31,7 +31,7 @@ class Interest(models.Model):
 
 class UserInterest(models.Model):
     user = models.ForeignKey(
-        User, 
+        AppUser, 
         on_delete=models.CASCADE,
         related_name='interests'
     )
