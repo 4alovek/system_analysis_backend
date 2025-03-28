@@ -2,7 +2,11 @@
 
 
 **Проект** — это мобильное приложение с умной лентой новостей, которая генерирует контент на основе интересов пользователей. Приложение использует интеграцию с GPT API для создания персонализированных постов.
-
+## TODO
+- обновить структуру проекта
+- добавить пример настройки GPT-модели
+- обновить API
+- добавить Makefile для удобства запуска проекта
 ---
 
 ## Оглавление
@@ -84,6 +88,7 @@ src/frameworks_and_drivers/django/gpt_integration/gpt_service.py
 ### 4. Запуск сервера разработки
 ```bash
 ollama run llama3.1 # Для запуска локальной модели (При наличии)
+python src/frameworks_and_drivers/django/manage.py makemigrations
 python frameworks_and_drivers/django/manage.py runserver
 ```
 
