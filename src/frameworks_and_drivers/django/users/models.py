@@ -8,9 +8,6 @@ class User(models.Model):
     password_hash = models.CharField(max_length=128)  # Совместимо с Django-авторизацией
     full_name = models.CharField(max_length=255)
 
-    class Meta:
-        app_label = "frameworks_and_drivers.django.users"
-
 
 class UserInterest(models.Model):
     interest_id = models.AutoField(primary_key=True)
@@ -18,6 +15,3 @@ class UserInterest(models.Model):
     interest_name = models.CharField(max_length=100)
     preference_weight = models.FloatField(default=1.0)
     preference_difficulty = models.IntegerField(default=1)
-    
-    class Meta:
-        app_label = "frameworks_and_drivers.django.users"

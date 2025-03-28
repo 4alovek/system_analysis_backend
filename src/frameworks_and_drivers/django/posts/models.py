@@ -1,5 +1,5 @@
 from django.db import models
-from frameworks_and_drivers.django.users.models import User
+from users.models import User
 
 
 class Post(models.Model):
@@ -16,9 +16,6 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     status = models.CharField(max_length=10, choices=StatusChoices.choices, default=StatusChoices.DRAFT)
 
-    class Meta:
-        app_label = "frameworks_and_drivers.django.posts"
-
 
 class PostReaction(models.Model):
     class ReactionTypes(models.TextChoices):
@@ -32,5 +29,4 @@ class PostReaction(models.Model):
     reaction_type = models.CharField(max_length=7, choices=ReactionTypes.choices)
 
     class Meta:
-        app_label = "frameworks_and_drivers.django.posts"
         unique_together = ('user', 'post')  # 1 реакция на пост от пользователя
