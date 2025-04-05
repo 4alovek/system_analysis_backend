@@ -25,13 +25,17 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-  model="llama3.1",
+  # model="llama3.1",
+  model="yandex/YandexGPT-5-Lite-8B-instruct-GGUF",
   messages=[
-    {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "Who won the world series in 2020?"},
-    {"role": "assistant", "content": "The LA Dodgers won in 2020."},
-    {"role": "user", "content": "Where was it played?"}
-  ]
+    # {"role": "system", "content": "You are a helpful assistant."},
+    # {"role": "user", "content": "Who won the world series in 2020?"},
+    # {"role": "assistant", "content": "The LA Dodgers won in 2020."},
+    # {"role": "user", "content": "Where was it played?"}
+    {"role": "user", "content": "Напиши стихотворение про кетчунез"}
+  ],
+  max_tokens=10000,
+  temperature=0.7,
 )
 print(response.choices[0].message.content)
 
