@@ -27,4 +27,4 @@ python src/frameworks_and_drivers/django/manage.py migrate
 
 # Запускаем сервер
 echo "Starting server..."
-python src/frameworks_and_drivers/django/manage.py runserver 0.0.0.0:8020
+python src/frameworks_and_drivers/django/manage.py runserver 0.0.0.0:8000

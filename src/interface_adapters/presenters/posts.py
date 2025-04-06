@@ -1,28 +1,31 @@
 from pydantic import BaseModel
 from datetime import datetime
 from interface_adapters.dtos.posts import PostDto, PostReactionDto
+from abc import ABC, abstractmethod
+from typing import Optional
 
 
-class PostPresenter(BaseModel):
-    post_id: int
-    user_id: int
-    content: str
-    generated_by_gpt: bool
-    title: str | None
-    status: str
-    created_at: datetime | None
+class PostPresenterInterface(ABC):
+    @abstractmethod
+    def present(self, post: Optional[PostDto]) -> dict:
+        """Преобразовать DTO в формат ответа"""
+        pass
 
-    @classmethod
-    def from_dto(cls, dto: PostDto) -> "PostPresenter":
-        return cls(
-            post_id=dto.post_id,
-            user_id=dto.user_id,
-            content=dto.content,
-            generated_by_gpt=dto.generated_by_gpt,
-            title=dto.title,
-            status=dto.status,
-            created_at=dto.created_at,
-        )
+
+class NinjaPostPresenter(PostPresenterInterface):
+    def present(self, post: Optional[PostDto]) -> dict:
+        if post is None:
+            return {"detail": "Post not found"}
+        
+        return {
+            "post_id": post.post_id,
+            "user_id": post.user_id,
+            "content": post.content,
+            "generated_by_gpt": post.generated_by_gpt,
+            "title": post.title,
+            "status": post.status,
+            "created_at": post.created_at.isoformat() if post.created_at else None,
+        }
 
 
 class PostReactionPresenter(BaseModel):

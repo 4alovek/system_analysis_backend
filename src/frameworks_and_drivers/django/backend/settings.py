@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ninja_extra',
     'users',
     'posts',
     'gpt_integration',
@@ -84,16 +85,16 @@ environ.Env.read_env()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': env('DB_NAME'),
-        # 'USER': env('DB_USER'),
-        # 'PASSWORD': env('DB_PASSWORD'),
-        # 'HOST': env('DB_HOST'),
-        # 'PORT': 5432,
-        'NAME': "backend",
-        'USER': "user",
-        'PASSWORD': "pass",
-        'HOST': "localhost",
-        'PORT': 5442,
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': 5432,
+        # 'NAME': "backend",
+        # 'USER': "user",
+        # 'PASSWORD': "pass",
+        # 'HOST': "localhost",
+        # 'PORT': 5442,
     }
 }
 

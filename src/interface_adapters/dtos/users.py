@@ -24,3 +24,9 @@ class UserInterestDto:
     interest_name: str
     preference_weight: float | None
     preference_difficulty: int | None
+
+
+@dataclass
+class UserInterestInputDto:
+    user_id: int
+    interests: list[str]
