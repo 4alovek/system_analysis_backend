@@ -11,7 +11,7 @@ class OllamaGPTRepository(GPTRepositoryInterface):
 
     def generate_post_content(self, interests: list[str]) -> str:
         response = self.client.chat.completions.create(
-            model="llama3.1",
+            model="llama3.2:1b",
             messages=[
                 {"role": "user", "content": "Создай креативный пост в формате Markdown по темам:"},
                 {"role": "user", "content": ", ".join(interests)}

@@ -10,7 +10,7 @@ class GPTService:
 
     def generate_post_content(self):
         response = self.client.chat.completions.create(
-            model="llama3.1",
+            model="llama3.2:1b",
             messages=[
                 {"role": "user", "content": "Создай креативный пост по темам в формате Markdown, темы сейчас пришлю"},
                 {"role": "user", "content": "Инвестиции, Криптовалюта"}

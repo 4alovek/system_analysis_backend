@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from dataclasses import asdict
 
 
 @dataclass
@@ -9,7 +10,7 @@ class SetInterestsResponseDto:
 
 class SetUserInterestsPresenter:
     def present_success(self) -> SetInterestsResponseDto:
-        return SetInterestsResponseDto(success=True, message="Interests saved")
+        return asdict(SetInterestsResponseDto(success=True, message="Interests saved"))
 
     def present_failure(self, msg: str) -> SetInterestsResponseDto:
-        return SetInterestsResponseDto(success=False, message=msg)
+        return asdict(SetInterestsResponseDto(success=False, message=msg))

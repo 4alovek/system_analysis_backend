@@ -31,4 +31,4 @@ class LoginUserUseCase:
         if not check_password(data.password, user.password_hash):
             return self.presenter.present_failure("Invalid password")
 
-        return self.presenter.present_success(user.user_id)
+        return self.presenter.present_success(user)
