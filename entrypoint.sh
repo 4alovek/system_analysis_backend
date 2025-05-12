@@ -2,18 +2,18 @@
 set -e
 
 # Для отладки
-echo "Current environment:"
-echo "PYTHONPATH: $PYTHONPATH"
-echo "Current directory: $(pwd)"
-echo "Python version: $(python --version)"
+# echo "Current environment:"
+# echo "PYTHONPATH: $PYTHONPATH"
+# echo "Current directory: $(pwd)"
+# echo "Python version: $(python --version)"
 
 # Проверяем Python после активации
-echo "Python executable after activation: $(which python)"
-echo "Python path after activation: $(python -c 'import sys; print(sys.path)')"
+# echo "Python executable after activation: $(which python)"
+# echo "Python path after activation: $(python -c 'import sys; print(sys.path)')"
 
 # Проверяем установленные пакеты
-echo "Installed packages:"
-python -m pip list
+# echo "Installed packages:"
+# python -m pip list
 
 # Проверяем, что Django установлен
 # echo "Checking Django installation:"
@@ -22,6 +22,7 @@ python -m pip list
 
 # Запускаем миграции
 echo "Running migrations..."
+python src/frameworks_and_drivers/django/manage.py makemigrations
 python src/frameworks_and_drivers/django/manage.py migrate
 
 # Запускаем сервер
